@@ -1,0 +1,21 @@
+# OpenKM Hibernate configuration values
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.url=jdbc:postgresql://db:{{ openkm_db_cont_port | mandatory }}/{{ openkm_db_name | mandatory }}
+spring.datasource.username={{ openkm_db_user | mandatory }}
+spring.datasource.password={{ openkm_db_pass | mandatory }}
+
+# JPA stuff
+spring.jpa.hibernate.ddl-auto=create-only
+spring.jpa.properties.hibernate.dialect=com.openkm.db.dialect.PostgreSQL92Dialect
+
+# Cluster
+cluster.enabled=false
+cluster.node=master
+
+# Mail
+spring.mail.host=mail_postgres
+
+# Logging config
+spring.output.ansi.enabled=never
+
+# Extra

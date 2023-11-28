@@ -1,0 +1,45 @@
+---
+version: '3.7'
+services:
+  app:
+    container_name: '{{ openkm_app_cont_name }}'
+    image: '{{ openkm_app_cont_image }}'
+    restart: 'always'
+    ports:
+      - '{{ openkm_app_cont_port }}:{{ openkm_app_cont_port }}/tcp'
+    volumes:
+      - '{{ openkm_app_cont_vol }}/openkm.properties:/opt/tomcat/openkm.properties'
+    depends_on:
+      db:   { condition: service_healthy }
+      mail: { condition: service_started }
+    healthcheck:
+      test: ['CMD', 'wget', '-qO-', 'http://localhost:{{ openkm_app_cont_port }}/web/health']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  db:
+    container_name: '{{ openkm_db_cont_name }}'
+    image: '{{ openkm_db_cont_image }}'
+    env_file: '{{ openkm_service_path }}/db.env'
+    restart: 'always'
+    command: |
+      -p {{ openkm_db_cont_port }}
+    ports:
+      - '{{ openkm_db_cont_port }}:{{ openkm_db_cont_port }}/tcp'
+    tmpfs:
+      - '/run/postgresql'
+      - '/tmp'
+    volumes:
+      - '{{ openkm_db_cont_vol }}/data:/var/lib/postgresql/data'
+      - '{{ openkm_db_cont_vol }}/backup:/backup'
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-p{{ openkm_db_cont_port }}', '-U{{ openkm_db_user }}']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  mail:
+    container_name: '{{ openkm_mail_cont_name }}'
+    image: '{{ openkm_mail_cont_image }}'
+    env_file: '{{ openkm_service_path }}/mail.env'

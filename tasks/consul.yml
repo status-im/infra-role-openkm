@@ -1,0 +1,16 @@
+---
+- name: Create Consul service definition
+  include_role: name=infra-role-consul-service
+  vars:
+    consul_config_name: '{{ openkm_service_name }}'
+    consul_services:
+      - name: '{{ openkm_service_name }}'
+        tags: ['openkm', 'docs']
+        port: '{{ openkm_app_cont_port }}'
+        checks:
+          - id: '{{ openkm_service_name }}-health'
+            name: 'OpenKM Healthcheck'
+            type: 'http'
+            http: 'http://localhost:{{ openkm_app_cont_port }}/health'
+            header:
+              X-Forwarded-Proto: ['https']

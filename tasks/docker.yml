@@ -1,0 +1,20 @@
+---
+- name: Create compose file
+  template:
+    src: 'docker-compose.yml.j2'
+    dest: '{{ openkm_compose_file }}'
+    owner: 'dockremap'
+    group: 'docker'
+    mode: 0640
+
+- name: Create containers
+  docker_compose:
+    project_src: '{{ openkm_service_path }}'
+    pull: true
+    build: false
+    state: '{{ compose_state }}'
+    recreate: '{{ compose_recreate | default("smart") }}'
+    restarted: >
+      {{ openkm_cont_env.changed or
+         openkm_config.changed or
+         compose_restart }}

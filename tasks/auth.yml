@@ -1,0 +1,10 @@
+---
+- name: Log into OpenKM Docker registry
+  become_user: '{{ item }}'
+  docker_login:
+    registry_url: '{{ openkm_docker_registry_url | mandatory }}'
+    username:     '{{ openkm_docker_registry_user | mandatory }}'
+    password:     '{{ openkm_docker_registry_pass | mandatory }}'
+  with_items:
+    - 'root'
+    - 'admin'
