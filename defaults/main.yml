@@ -5,6 +5,7 @@ openkm_compose_file: '{{ openkm_service_path }}/docker-compose.yml'
 
 # Config
 #openkm_domain: 'openkm.example.org'
+openkm_root_log_level: 'error'
 openkm_allowed_networks: [' 10.0.0.0/8', '172.16.0.0/16']
 
 # Docker Registry
