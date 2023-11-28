@@ -12,6 +12,9 @@ services:
     depends_on:
       db:   { condition: service_healthy }
       mail: { condition: service_started }
+    entrypoint: '/usr/bin/supervisord'
+    command: |
+      -n -c /etc/supervisor/supervisord.conf
     healthcheck:
       test: ['CMD', 'wget', '-qO-', 'http://localhost:{{ openkm_app_cont_port }}/openkm/kcenter/']
       interval: 30s
