@@ -11,6 +11,4 @@
           - id: '{{ openkm_service_name }}-health'
             name: 'OpenKM Healthcheck'
             type: 'http'
-            http: 'http://localhost:{{ openkm_app_cont_port }}/health'
-            header:
-              X-Forwarded-Proto: ['https']
+            http: 'http://localhost:{{ openkm_app_cont_port }}/openkm/kcenter/'

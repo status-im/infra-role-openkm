@@ -13,7 +13,7 @@ services:
       db:   { condition: service_healthy }
       mail: { condition: service_started }
     healthcheck:
-      test: ['CMD', 'wget', '-qO-', 'http://localhost:{{ openkm_app_cont_port }}/web/health']
+      test: ['CMD', 'wget', '-qO-', 'http://localhost:{{ openkm_app_cont_port }}/openkm/kcenter/']
       interval: 30s
       timeout: 10s
       retries: 3
