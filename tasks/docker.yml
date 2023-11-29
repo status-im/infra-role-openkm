@@ -1,4 +1,12 @@
 ---
+- name: Create app Dockerfile
+  template:
+    src:   'Dockerfile.j2'
+    dest:  '{{ openkm_app_cont_vol }}/docker/Dockerfile'
+    owner: 'dockremap'
+    group: 'docker'
+    mode:   0640
+
 - name: Create compose file
   template:
     src: 'docker-compose.yml.j2'
@@ -11,7 +19,7 @@
   docker_compose:
     project_src: '{{ openkm_service_path }}'
     pull: true
-    build: false
+    build: true
     state: '{{ compose_state }}'
     recreate: '{{ compose_recreate | default("smart") }}'
     restarted: >

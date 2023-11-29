@@ -1,0 +1,4 @@
+FROM '{{ openkm_app_cont_image }}'
+
+# It's owned by root for no good reason.
+RUN chown -R www-data /opt/tomcat
