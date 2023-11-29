@@ -21,14 +21,12 @@ openkm_app_cont_tag: '8.1.5'
 openkm_app_cont_image: 'docker.openkm.com/private/professional:{{ openkm_app_cont_tag }}'
 openkm_app_cont_port: 8080
 openkm_app_cont_uid: 0
-openkm_app_host_uid: '{{ 100000 + openkm_app_cont_uid | int }}'
 # DB
 openkm_db_cont_name: '{{ openkm_service_name }}-db'
 openkm_db_cont_vol: '{{ openkm_service_path }}/db'
 openkm_db_cont_image: 'postgres:16.1-alpine3.18'
 openkm_db_cont_port: 5432
 openkm_db_cont_uid: 70
-openkm_db_host_uid: '{{ 100000 + openkm_db_cont_uid | int }}'
 openkm_db_name: 'openkm'
 openkm_db_user: 'openkm'
 openkm_db_pass: 'changeIfYouCare'
