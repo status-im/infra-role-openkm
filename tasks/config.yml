@@ -4,17 +4,18 @@
     path:  '{{ item.path }}'
     owner: '{{ item.get("owner", "dockremap") }}'
     group: '{{ item.get("group", "dockremap") }}'
+    mode:  '{{ item.get("mode",  "0750") }}'
     state: 'directory'
-    mode:  0750
   with_items:
-    - { path: '{{ openkm_service_path }}',       group: 'docker'                    }
-    - { path: '{{ openkm_app_cont_vol }}',       group: 'docker'                    }
-    - { path: '{{ openkm_app_cont_vol }}/docker',group: 'docker'                    }
-    - { path: '{{ openkm_app_cont_vol }}/data',  owner: '{{ openkm_app_cont_uid }}' }
-    - { path: '{{ openkm_app_cont_vol }}/conf',  owner: '{{ openkm_app_cont_uid }}' }
-    - { path: '{{ openkm_app_cont_vol }}/logs',  owner: '{{ openkm_app_cont_uid }}' }
-    - { path: '{{ openkm_db_cont_vol }}/data',   owner: '{{ openkm_db_cont_uid }}'  }
-    - { path: '{{ openkm_db_cont_vol }}/backup', owner: '{{ openkm_db_cont_uid }}'  }
+    - { path: '{{ openkm_service_path }}',       group: 'docker'                     }
+    - { path: '{{ openkm_app_cont_vol }}',       group: 'docker'                     }
+    - { path: '{{ openkm_app_cont_vol }}/docker',group: 'docker'                     }
+    - { path: '{{ openkm_app_cont_vol }}/data',  owner: '{{ openkm_app_cont_uid }}'  }
+    - { path: '{{ openkm_app_cont_vol }}/conf',  owner: '{{ openkm_app_cont_uid }}'  }
+    - { path: '{{ openkm_app_cont_vol }}/logs',  owner: '{{ openkm_app_cont_uid }}'  }
+    - { path: '{{ openkm_db_cont_vol }}/data',   owner: '{{ openkm_db_cont_uid }}'   }
+    - { path: '{{ openkm_db_cont_vol }}/backup', owner: '{{ openkm_db_cont_uid }}'   }
+    - { path: '{{ openkm_xvfb_cont_vol }}',      group: '{{ openkm_xvfb_cont_uid }}', mode: '1777' }
 
 - name: Template container env files
   register: openkm_cont_env
@@ -25,22 +26,13 @@
     group: 'docker'
     mode:  '0640'
   with_fileglob:
-    - 'templates/env/*' 
+    - 'templates/env/*'
 
 - name: Template OpenKM config file
   register: openkm_config
   template:
     src:   'openkm.properties.j2'
     dest:  '{{ openkm_app_cont_vol }}/openkm.properties'
-    owner: '{{ openkm_app_cont_uid }}'
-    group: 'docker'
-    mode:  '0644'
-
-- name: Template Supervisord config file
-  register: openkm_config
-  template:
-    src:   'supervisord.conf.j2'
-    dest:  '{{ openkm_app_cont_vol }}/conf/supervisord.conf'
     owner: '{{ openkm_app_cont_uid }}'
     group: 'docker'
     mode:  '0644'

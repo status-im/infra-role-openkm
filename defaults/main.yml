@@ -21,6 +21,11 @@ openkm_app_cont_tag: '8.1.5'
 openkm_app_cont_image: 'docker.openkm.com/private/professional:{{ openkm_app_cont_tag }}'
 openkm_app_cont_port: 8080
 openkm_app_cont_uid: 33
+# Xvfb
+openkm_xvfb_cont_name: '{{ openkm_service_name }}-xvfb'
+openkm_xvfb_cont_vol: '{{ openkm_service_path }}/xvfb'
+openkm_xvfb_cont_image: '{{ openkm_app_cont_image }}'
+openkm_xvfb_cont_uid: 0
 # DB
 openkm_db_cont_name: '{{ openkm_service_name }}-db'
 openkm_db_cont_vol: '{{ openkm_service_path }}/db'
