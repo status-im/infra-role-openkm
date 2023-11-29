@@ -4,9 +4,8 @@ services:
   app:
     container_name: '{{ openkm_app_cont_name }}'
     image: '{{ openkm_app_cont_image }}'
+    network_mode: 'host'
     restart: 'always'
-    ports:
-      - '{{ openkm_app_cont_port }}:{{ openkm_app_cont_port }}/tcp'
     volumes:
       - '{{ openkm_app_cont_vol }}/openkm.properties:/opt/tomcat/openkm.properties'
     depends_on:
@@ -25,11 +24,10 @@ services:
     container_name: '{{ openkm_db_cont_name }}'
     image: '{{ openkm_db_cont_image }}'
     env_file: '{{ openkm_service_path }}/db.env'
+    network_mode: 'host'
     restart: 'always'
     command: |
       -p {{ openkm_db_cont_port }}
-    ports:
-      - '{{ openkm_db_cont_port }}:{{ openkm_db_cont_port }}/tcp'
     tmpfs:
       - '/run/postgresql'
       - '/tmp'
