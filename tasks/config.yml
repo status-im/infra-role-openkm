@@ -10,6 +10,8 @@
     - { path: '{{ openkm_service_path }}',       group: 'docker'                    }
     - { path: '{{ openkm_app_cont_vol }}',       owner: '{{ openkm_app_cont_uid }}' }
     - { path: '{{ openkm_app_cont_vol }}/data',  owner: '{{ openkm_app_cont_uid }}' }
+    - { path: '{{ openkm_app_cont_vol }}/conf',  owner: '{{ openkm_app_cont_uid }}' }
+    - { path: '{{ openkm_app_cont_vol }}/logs',  owner: '{{ openkm_app_cont_uid }}' }
     - { path: '{{ openkm_db_cont_vol }}/data',   owner: '{{ openkm_db_cont_uid }}'  }
     - { path: '{{ openkm_db_cont_vol }}/backup', owner: '{{ openkm_db_cont_uid }}'  }
 
@@ -29,6 +31,15 @@
   template:
     src:   'openkm.properties.j2'
     dest:  '{{ openkm_app_cont_vol }}/openkm.properties'
+    owner: '{{ openkm_app_cont_uid }}'
+    group: 'docker'
+    mode:  '0644'
+
+- name: Template Supervisord config file
+  register: openkm_config
+  template:
+    src:   'supervisord.conf.j2'
+    dest:  '{{ openkm_app_cont_vol }}/conf/supervisord.conf'
     owner: '{{ openkm_app_cont_uid }}'
     group: 'docker'
     mode:  '0644'

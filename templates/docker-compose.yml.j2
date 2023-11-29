@@ -4,10 +4,13 @@ services:
   app:
     container_name: '{{ openkm_app_cont_name }}'
     image: '{{ openkm_app_cont_image }}'
+    user: 'www-data'
     network_mode: 'host'
     restart: 'always'
     volumes:
       - '{{ openkm_app_cont_vol }}/openkm.properties:/opt/tomcat/openkm.properties'
+      - '{{ openkm_app_cont_vol }}/conf:/etc/supervisor/conf.d'
+      - '{{ openkm_app_cont_vol }}/logs:/var/log/supervisor'
     depends_on:
       db:   { condition: service_healthy }
       mail: { condition: service_started }
