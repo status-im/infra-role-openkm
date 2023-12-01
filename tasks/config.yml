@@ -16,6 +16,7 @@
     - { path: '{{ openkm_db_cont_vol }}/data',   owner: '{{ openkm_db_cont_uid }}'   }
     - { path: '{{ openkm_db_cont_vol }}/backup', owner: '{{ openkm_db_cont_uid }}'   }
     - { path: '{{ openkm_xvfb_cont_vol }}',      group: '{{ openkm_xvfb_cont_uid }}', mode: '1777' }
+    - { path: '{{ openkm_mail_cont_vol }}',      group: 'docker'                     }
 
 - name: Template container env files
   register: openkm_cont_env
@@ -36,3 +37,11 @@
     owner: '{{ openkm_app_cont_uid }}'
     group: 'docker'
     mode:  '0644'
+
+- name: Template SMTP healcheck script
+  template:
+    src:   'scripts/smtp_healthcheck.sh.j2'
+    dest:  '{{ openkm_mail_cont_vol }}/healthcheck.sh'
+    owner: 'dockremap'
+    group: 'docker'
+    mode:  '0755'

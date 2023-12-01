@@ -62,3 +62,10 @@ services:
     container_name: '{{ openkm_mail_cont_name }}'
     image: '{{ openkm_mail_cont_image }}'
     env_file: '{{ openkm_service_path }}/mail.env'
+    volumes:
+      - '{{ openkm_mail_cont_vol }}/healthcheck.sh:/usr/local/bin/smtp_healthcheck.sh'
+    healthcheck:
+      test: ['CMD', '/usr/local/bin/smtp_healthcheck.sh']
+      interval: 30s
+      timeout: 10s
+      retries: 3

@@ -37,6 +37,7 @@ openkm_db_user: 'openkm'
 openkm_db_pass: 'changeIfYouCare'
 # Mail
 openkm_mail_cont_name: '{{ openkm_service_name }}-mail'
+openkm_mail_cont_vol:  '{{ openkm_service_path }}/mail'
 openkm_mail_cont_hash: 'sha256:9fd6ff05ac25141fe10ae4f9db0df361ad6139244ac280c398cc175bd2356a98'
 openkm_mail_cont_image: 'bytemark/smtp@{{ openkm_mail_cont_hash }}'
 openkm_mail_cont_port: 25
