@@ -3,8 +3,8 @@ version: '3.7'
 services:
   app:
     container_name: '{{ openkm_app_cont_name }}'
-    build: '{{ openkm_app_cont_vol }}/docker'
-    user: 'www-data'
+    image: '{{ openkm_app_cont_image }}'
+    user: 'openkm'
     network_mode: 'host'
     restart: 'always'
     stop_signal: SIGINT
@@ -26,7 +26,7 @@ services:
   xvfb:
     container_name: '{{ openkm_xvfb_cont_name }}'
     image: '{{ openkm_xvfb_cont_image }}'
-    user: 'www-data'
+    user: 'openkm'
     restart: 'always'
     entrypoint: '/usr/bin/Xvfb'
     command: ':1'

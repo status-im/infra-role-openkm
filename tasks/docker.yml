@@ -1,12 +1,4 @@
 ---
-- name: Create app Dockerfile
-  template:
-    src:   'Dockerfile.j2'
-    dest:  '{{ openkm_app_cont_vol }}/docker/Dockerfile'
-    owner: 'dockremap'
-    group: 'docker'
-    mode:   0640
-
 - name: Create compose file
   template:
     src: 'docker-compose.yml.j2'
