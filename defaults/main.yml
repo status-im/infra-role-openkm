@@ -9,6 +9,9 @@ openkm_root_log_level: 'error'
 openkm_allowed_networks: [' 10.0.0.0/8', '172.16.0.0/16']
 openkm_max_file_size_mb: 100 # MB
 
+# Optional Installation ID persistence
+#openkm_installation_id: '00000000-0000-0000-0000-000000000000'
+
 # Docker Registry
 openkm_docker_registry_url: 'https://docker.openkm.com/'
 #openkm_docker_registry_user: ~

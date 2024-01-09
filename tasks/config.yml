@@ -13,6 +13,7 @@
     - { path: '{{ openkm_app_cont_vol }}/data',  owner: '{{ openkm_app_cont_uid }}'  }
     - { path: '{{ openkm_app_cont_vol }}/conf',  owner: '{{ openkm_app_cont_uid }}'  }
     - { path: '{{ openkm_app_cont_vol }}/logs',  owner: '{{ openkm_app_cont_uid }}'  }
+    - { path: '{{ openkm_app_cont_vol }}/repo',  owner: '{{ openkm_app_cont_uid }}'  }
     - { path: '{{ openkm_db_cont_vol }}/data',   owner: '{{ openkm_db_cont_uid }}'   }
     - { path: '{{ openkm_db_cont_vol }}/backup', owner: '{{ openkm_db_cont_uid }}'   }
     - { path: '{{ openkm_xvfb_cont_vol }}',      group: '{{ openkm_xvfb_cont_uid }}', mode: '1777' }
@@ -45,3 +46,12 @@
     owner: 'dockremap'
     group: 'docker'
     mode:  '0755'
+
+- name: Create installation ID file
+  when: openkm_installation_id is defined
+  copy:
+    content: '{{ openkm_installation_id }}'
+    dest:  '{{ openkm_app_cont_vol }}/repo/.system.key'
+    owner: '{{ openkm_app_cont_uid }}'
+    group: '{{ openkm_app_cont_uid }}'
+    mode:  '0640'

@@ -4,7 +4,8 @@
   vars:
     consul_config_name: '{{ openkm_service_name }}'
     consul_services:
-      - name: '{{ openkm_service_name }}'
+      - id:   '{{ openkm_service_name }}'
+        name: '{{ openkm_service_name }}'
         tags: ['openkm', 'docs']
         port: '{{ openkm_app_cont_port }}'
         checks:
