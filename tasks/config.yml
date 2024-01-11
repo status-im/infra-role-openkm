@@ -34,7 +34,7 @@
   register: openkm_config
   template:
     src:   'openkm.properties.j2'
-    dest:  '{{ openkm_app_cont_vol }}/openkm.properties'
+    dest:  '{{ openkm_app_cont_vol }}/conf/openkm.properties'
     owner: '{{ openkm_app_cont_uid }}'
     group: 'docker'
     mode:  '0644'
