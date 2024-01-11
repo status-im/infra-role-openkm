@@ -1,0 +1,25 @@
+<included>
+  <logger name="org.springframework" level="INFO" />
+  <logger name="org.hibernate" level="WARN" />
+  <logger name="org.hibernate.SQL" level="INFO" />
+  <logger name="org.hibernate.type.descriptor.sql" level="INFO" />
+  <logger name="ch.qos.logback" level="WARN" />
+  <logger name="com.openkm" level="INFO" />
+  <logger name="com.openkm.util.DocConverter" level="INFO" />
+  <logger name="com.openkm.util.ExecutionUtils" level="INFO" />
+  
+  <logger name="com.openkm.module.db.DbRepository" level="INFO" />
+  <logger name="com.openkm.module.db.DbFolderModule" level="INFO" />
+  <logger name="com.openkm.module.db.DbDocumentModule" level="INFO" />
+  <logger name="com.openkm.plugin.properties.DefaultNodeProperties" level="INFO" />
+  <logger name="com.openkm.module.db.base.BaseNotificationModule" level="INFO" />
+  <logger name="com.openkm.principal.PrincipalUtils" level="INFO" />
+  
+  <logger name="org.springframework.jdbc" level="INFO" />
+  <logger name="org.springframework.orm.jpa" level="INFO" />
+  <logger name="org.springframework.transaction" level="INFO" />
+  <logger name="org.springframework.transaction.interceptor" level="INFO" />
+  
+  <logger name="com.openkm.util.DatabaseDialectAdapter" level="INFO" />
+  <logger name="com.openkm.ws.rest.endpoint.RepositoryService" level="INFO" />
+</included>

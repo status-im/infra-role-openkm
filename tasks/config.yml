@@ -30,14 +30,16 @@
   with_fileglob:
     - 'templates/env/*'
 
-- name: Template OpenKM config file
+- name: Template OpenKM config files
   register: openkm_config
   template:
-    src:   'openkm.properties.j2'
-    dest:  '{{ openkm_app_cont_vol }}/conf/openkm.properties'
+    src:   '{{ item }}'
+    dest:  '{{ openkm_app_cont_vol }}/conf/{{ item | basename }}'
     owner: '{{ openkm_app_cont_uid }}'
     group: 'docker'
     mode:  '0644'
+  with_fileglob:
+    - 'templates/config/*'
 
 - name: Template SMTP healcheck script
   template:

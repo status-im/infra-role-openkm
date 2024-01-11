@@ -12,6 +12,7 @@ services:
     command: 'run'
     volumes:
       - '{{ openkm_app_cont_vol }}/conf/openkm.properties:/opt/tomcat/openkm.properties'
+      - '{{ openkm_app_cont_vol }}/conf/logback.xml:/opt/tomcat/logback.xml'
       - '{{ openkm_app_cont_vol }}/repo:/opt/tomcat/repository'
       - '{{ openkm_app_cont_vol }}/logs:/opt/tomcat/logs'
       - '{{ openkm_xvfb_cont_vol }}:/tmp/.X11-unix'
