@@ -30,6 +30,16 @@
   with_fileglob:
     - 'templates/env/*'
 
+- name: Create installation ID file
+  when: openkm_installation_id is defined
+  register: openkm_installation_id_file
+  copy:
+    content: '{{ openkm_installation_id }}'
+    dest:  '{{ openkm_app_cont_vol }}/repo/.system.key'
+    owner: '{{ openkm_app_cont_uid }}'
+    group: '{{ openkm_app_cont_uid }}'
+    mode:  '0640'
+
 - name: Template OpenKM config files
   register: openkm_config
   template:
@@ -40,13 +50,3 @@
     mode:  '0644'
   with_fileglob:
     - 'templates/config/*'
-
-- name: Create installation ID file
-  when: openkm_installation_id is defined
-  register: openkm_installation_id_file
-  copy:
-    content: '{{ openkm_installation_id }}'
-    dest:  '{{ openkm_app_cont_vol }}/repo/.system.key'
-    owner: '{{ openkm_app_cont_uid }}'
-    group: '{{ openkm_app_cont_uid }}'
-    mode:  '0640'
