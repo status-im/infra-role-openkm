@@ -1,6 +1,8 @@
 ---
 - import_tasks: auth.yml
+- import_tasks: query.yml
 - import_tasks: config.yml
 - import_tasks: script.yml
 - import_tasks: docker.yml
+- import_tasks: users.yml
 - import_tasks: consul.yml

@@ -5,6 +5,8 @@ openkm_compose_file: '{{ openkm_service_path }}/docker-compose.yml'
 
 # Config
 #openkm_domain: 'openkm.example.org'
+openkm_admin_username: 'okmAdmin'
+#openkm_admin_password: 'changeIfYouCare'
 openkm_root_log_level: 'error'
 openkm_log_login_attempts: false
 openkm_allowed_networks: [' 10.0.0.0/8', '172.16.0.0/16']

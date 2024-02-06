@@ -1,0 +1,18 @@
+---
+- name: Install psycopg2 dependency
+  apt:
+    name: 'python3-psycopg2'
+
+- name: Update okmAdmin user password
+  postgresql_query:
+    db:             '{{ openkm_db_name | mandatory }}'
+    login_user:     '{{ openkm_db_user | mandatory }}'
+    login_password: '{{ openkm_db_pass | mandatory }}'
+    login_host:     'localhost'
+    query: |
+      UPDATE okm_user
+      SET usr_password = %s
+      WHERE usr_id = %s 
+    positional_args:
+      - '{{ openkm_admin_password | password_hash("bcrypt") }}'
+      - '{{ openkm_admin_username | mandatory }}'
