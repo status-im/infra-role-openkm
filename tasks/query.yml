@@ -1,0 +1,9 @@
+---
+- name: Query API for current version used
+  uri:
+    url: 'http://localhost:{{ openkm_app_cont_port }}/openkm/rest/repository/configuration/version'
+    user:     '{{ openkm_admin_username | mandatory }}'
+    password: '{{ openkm_admin_password | mandatory }}'
+    return_content: true
+    status_code: [200, 401]
+  register: openkm_current_version

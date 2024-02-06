@@ -7,6 +7,7 @@ openkm_compose_file: '{{ openkm_service_path }}/docker-compose.yml'
 #openkm_domain: 'openkm.example.org'
 openkm_admin_username: 'okmAdmin'
 #openkm_admin_password: 'changeIfYouCare'
+openkm_version: '8.1.7'
 openkm_root_log_level: 'error'
 openkm_log_login_attempts: false
 openkm_allowed_networks: [' 10.0.0.0/8', '172.16.0.0/16']
@@ -23,7 +24,7 @@ openkm_docker_registry_url: 'https://docker.openkm.com/'
 # App
 openkm_app_cont_name: '{{ openkm_service_name }}-app'
 openkm_app_cont_vol: '{{ openkm_service_path }}/app'
-openkm_app_cont_tag: '8.1.7-nonroot'
+openkm_app_cont_tag: '{{ openkm_version }}-nonroot'
 openkm_app_cont_image: 'docker.openkm.com/private/professional:{{ openkm_app_cont_tag }}'
 openkm_app_cont_port: 8080
 openkm_app_cont_uid: 1000
