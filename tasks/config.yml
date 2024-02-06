@@ -43,6 +43,7 @@
 
 - name: Create installation ID file
   when: openkm_installation_id is defined
+  register: openkm_installation_id_file
   copy:
     content: '{{ openkm_installation_id }}'
     dest:  '{{ openkm_app_cont_vol }}/repo/.system.key'
