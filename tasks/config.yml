@@ -14,6 +14,7 @@
     - { path: '{{ openkm_app_cont_vol }}/conf',  owner: '{{ openkm_app_cont_uid }}'  }
     - { path: '{{ openkm_app_cont_vol }}/logs',  owner: '{{ openkm_app_cont_uid }}'  }
     - { path: '{{ openkm_app_cont_vol }}/repo',  owner: '{{ openkm_app_cont_uid }}'  }
+    - { path: '{{ openkm_proxy_cont_vol }}/conf',group: 'docker'                     }
     - { path: '{{ openkm_db_cont_vol }}/data',   owner: '{{ openkm_db_cont_uid }}'   }
     - { path: '{{ openkm_db_cont_vol }}/backup', owner: '{{ openkm_db_cont_uid }}'   }
     - { path: '{{ openkm_xvfb_cont_vol }}',      group: '{{ openkm_xvfb_cont_uid }}', mode: '1777' }
@@ -50,3 +51,11 @@
     mode:  '0644'
   with_fileglob:
     - 'templates/config/*'
+
+- name: Template Nginx proxy config
+  template:
+    src:   'nginx_proxy.conf.j2'
+    dest:  '{{ openkm_proxy_cont_vol }}/conf/default.conf'
+    owner: 'dockremap'
+    group: 'docker'
+    mode:  '0644'

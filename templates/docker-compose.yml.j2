@@ -26,6 +26,18 @@ services:
       timeout: 10s
       retries: 3
 
+  proxy:
+    container_name: '{{ openkm_proxy_cont_name }}'
+    image: '{{ openkm_proxy_cont_image }}'
+    restart: 'always'
+    volumes:
+      - '{{ openkm_proxy_cont_vol }}/conf:/etc/nginx/conf.d'
+    healthcheck:
+      test: ['CMD', '/usr/bin/curl', '-sSf', 'http://localhost:{{ openkm_proxy_cont_port }}/health']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
   xvfb:
     container_name: '{{ openkm_xvfb_cont_name }}'
     image: '{{ openkm_xvfb_cont_image }}'

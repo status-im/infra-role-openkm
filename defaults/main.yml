@@ -28,6 +28,12 @@ openkm_app_cont_tag: '{{ openkm_version }}-nonroot'
 openkm_app_cont_image: 'docker.openkm.com/private/professional:{{ openkm_app_cont_tag }}'
 openkm_app_cont_port: 8080
 openkm_app_cont_uid: 1000
+# Proxy
+openkm_proxy_cont_name: '{{ openkm_service_name }}-proxy'
+openkm_proxy_cont_vol: '{{ openkm_service_path }}/proxy'
+openkm_proxy_cont_tag: '1.25-alpine'
+openkm_proxy_cont_image: 'nginx:{{ openkm_proxy_cont_tag }}'
+openkm_proxy_cont_port: 8080
 # Xvfb
 openkm_xvfb_cont_name: '{{ openkm_service_name }}-xvfb'
 openkm_xvfb_cont_vol: '{{ openkm_service_path }}/xvfb'

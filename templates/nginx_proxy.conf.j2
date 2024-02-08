@@ -1,0 +1,28 @@
+server {
+    listen {{ openkm_proxy_cont_port }};
+    server_name {{ openkm_domain }};
+
+    # Avoid checking files size #
+    client_max_body_size 0;
+
+    rewrite ^/$ /openkm/ permanent;
+    
+    location /openkm/frontend/webSocket {
+        proxy_pass http://localhost:{{ openkm_app_cont_port }}/openkm/frontend/webSocket;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+    }
+    
+    location /openkm {
+         proxy_set_header X-Forwarded-Host $host;
+         proxy_set_header X-Forwarded-Server $host;
+         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+         proxy_pass http://localhost:{{ openkm_app_cont_port }}/openkm;
+    }
+
+    location /health {
+        return 200 "OK";
+    }
+}

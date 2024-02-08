@@ -7,9 +7,13 @@
       - id:   '{{ openkm_service_name }}'
         name: '{{ openkm_service_name }}'
         tags: ['openkm', 'docs']
-        port: '{{ openkm_app_cont_port }}'
+        port: '{{ openkm_proxy_cont_port }}'
         checks:
-          - id: '{{ openkm_service_name }}-health'
-            name: 'OpenKM Healthcheck'
+          - id: '{{ openkm_service_name }}-app-health'
+            name: 'OpenKM App Healthcheck'
             type: 'http'
             http: 'http://localhost:{{ openkm_app_cont_port }}/openkm/kcenter/'
+          - id: '{{ openkm_service_name }}-proxy-health'
+            name: 'OpenKM Proxy Healthcheck'
+            type: 'http'
+            http: 'http://localhost:{{ openkm_proxy_cont_port }}/health'
