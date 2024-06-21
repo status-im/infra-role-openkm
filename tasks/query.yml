@@ -1,5 +1,6 @@
 ---
 - name: Query API for current version used
+  no_log: true
   uri:
     url: 'http://localhost:{{ openkm_app_cont_port }}/openkm/rest/repository/configuration/version'
     user:     '{{ openkm_admin_username | mandatory }}'

@@ -1,16 +1,4 @@
 ---
-- name: Install PostgreSQL client
-  apt:
-    name: 'postgresql-client'
-
-- name: Template Database admin script
-  template:
-    src:   'scripts/db-admin.sh.j2'
-    dest:  '{{ openkm_service_path }}/db-admin.sh'
-    owner: 'dockremap'
-    group: 'docker'
-    mode:  '0755'
-
 - name: Template SMTP healcheck script
   template:
     src:   'scripts/smtp_healthcheck.sh.j2'

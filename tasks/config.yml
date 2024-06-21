@@ -14,12 +14,11 @@
     - { path: '{{ openkm_app_cont_vol }}/conf',  owner: '{{ openkm_app_cont_uid }}'  }
     - { path: '{{ openkm_app_cont_vol }}/logs',  owner: '{{ openkm_app_cont_uid }}'  }
     - { path: '{{ openkm_app_cont_vol }}/repo',  owner: '{{ openkm_app_cont_uid }}'  }
-    - { path: '{{ openkm_db_cont_vol }}/data',   owner: '{{ openkm_db_cont_uid }}'   }
-    - { path: '{{ openkm_db_cont_vol }}/backup', owner: '{{ openkm_db_cont_uid }}'   }
     - { path: '{{ openkm_xvfb_cont_vol }}',      group: '{{ openkm_xvfb_cont_uid }}', mode: '1777' }
     - { path: '{{ openkm_mail_cont_vol }}',      group: 'docker'                     }
 
 - name: Template container env files
+  no_log: true
   register: openkm_cont_env
   template:
     src:   '{{ item }}'
@@ -31,6 +30,7 @@
     - 'templates/env/*'
 
 - name: Create installation ID file
+  no_log: true
   when: openkm_installation_id is defined
   register: openkm_installation_id_file
   copy:
@@ -41,6 +41,7 @@
     mode:  '0640'
 
 - name: Template OpenKM config files
+  no_log: true
   register: openkm_config
   template:
     src:   '{{ item }}'

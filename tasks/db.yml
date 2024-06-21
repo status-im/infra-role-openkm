@@ -4,6 +4,7 @@
     name: 'python3-psycopg2'
 
 - name: Update okmAdmin user password
+  no_log: true
   postgresql_query:
     db:             '{{ openkm_db_name | mandatory }}'
     login_user:     '{{ openkm_db_user | mandatory }}'

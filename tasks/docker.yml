@@ -1,5 +1,6 @@
 ---
 - name: Create compose file
+  no_log: true
   template:
     src: 'docker-compose.yml.j2'
     dest: '{{ openkm_compose_file }}'
@@ -7,14 +8,22 @@
     group: 'docker'
     mode: 0640
 
+# Take into account additional docker-compose.yml file for PosrgreSQL
+- name: Find all Docker Compose files
+  find:
+    paths: '{{ openkm_service_path }}'
+    patterns: 'docker-compose*.yml'
+    recurse: false
+  register: openkm_compose
+
 - name: Create containers
-  docker_compose:
+  become_user: 'admin'
+  community.docker.docker_compose_v2:
     project_src: '{{ openkm_service_path }}'
-    pull: true
-    build: true
-    state: '{{ compose_state }}'
-    recreate: '{{ compose_recreate | default("smart") }}'
-    restarted: >
-      {{ openkm_cont_env.changed or
-         openkm_config.changed or
-         compose_restart }}
+    files: '{{ openkm_compose.files | map(attribute="path") | list }}'
+    pull: 'always'
+    build: 'always'
+    state: >-
+      {{ (openkm_cont_env.changed or openkm_config.changed or compose_restart)
+      | ternary("restarted", compose_state) }}
+    recreate: '{{ compose_recreate | default("auto") }}'

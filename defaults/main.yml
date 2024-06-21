@@ -34,11 +34,8 @@ openkm_xvfb_cont_vol: '{{ openkm_service_path }}/xvfb'
 openkm_xvfb_cont_image: '{{ openkm_app_cont_image }}'
 openkm_xvfb_cont_uid: 0
 # DB
-openkm_db_cont_name: '{{ openkm_service_name }}-db'
-openkm_db_cont_vol: '{{ openkm_service_path }}/db'
-openkm_db_cont_image: 'postgres:16.1-alpine3.18'
-openkm_db_cont_port: 5432
-openkm_db_cont_uid: 70
+openkm_db_addr: 'localhost'
+openkm_db_post: 5432
 openkm_db_name: 'openkm'
 openkm_db_user: 'openkm'
 openkm_db_pass: 'changeIfYouCare'
@@ -55,6 +52,6 @@ openkm_mail_smtp_domain: '{{ openkm_domain }}'
 #openkm_mail_smtp_pass: ~
 
 # general container management
-compose_state: 'present'
-compose_recreate: 'smart'
-compose_restart: false
+compose_state:    'present'
+compose_recreate: 'auto'
+compose_restart:  false
