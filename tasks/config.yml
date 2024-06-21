@@ -16,19 +16,6 @@
     - { path: '{{ openkm_app_cont_vol }}/repo',    owner: '{{ openkm_app_cont_uid }}'  }
     - { path: '{{ openkm_app_cont_vol }}/webapps', owner: '{{ openkm_app_cont_uid }}'  }
     - { path: '{{ openkm_xvfb_cont_vol }}',        group: '{{ openkm_xvfb_cont_uid }}', mode: '1777' }
-    - { path: '{{ openkm_mail_cont_vol }}',        group: 'docker'                     }
-
-- name: Template container env files
-  no_log: true
-  register: openkm_cont_env
-  template:
-    src:   '{{ item }}'
-    dest:  '{{ openkm_service_path }}/{{ item | basename }}'
-    owner: 'dockremap'
-    group: 'docker'
-    mode:  '0640'
-  with_fileglob:
-    - 'templates/env/*'
 
 - name: Create installation ID file
   no_log: true

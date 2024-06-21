@@ -19,7 +19,6 @@ services:
       - '{{ openkm_xvfb_cont_vol }}:/tmp/.X11-unix'
     depends_on:
       db:   { condition: service_healthy }
-      mail: { condition: service_started }
       xvfb: { condition: service_started }
     healthcheck:
       test: ['CMD', 'wget', '-qO-', 'http://localhost:{{ openkm_app_cont_port }}/openkm/kcenter/']
@@ -38,18 +37,6 @@ services:
       - '{{ openkm_xvfb_cont_vol }}:/tmp/.X11-unix'
     healthcheck:
       test: ['CMD', '/usr/bin/ls', '/tmp/.X11-unix/X1']
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
-  mail:
-    container_name: '{{ openkm_mail_cont_name }}'
-    image: '{{ openkm_mail_cont_image }}'
-    env_file: '{{ openkm_service_path }}/mail.env'
-    volumes:
-      - '{{ openkm_mail_cont_vol }}/healthcheck.sh:/usr/local/bin/smtp_healthcheck.sh'
-    healthcheck:
-      test: ['CMD', '/usr/local/bin/smtp_healthcheck.sh']
       interval: 30s
       timeout: 10s
       retries: 3

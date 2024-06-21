@@ -1,8 +1,0 @@
----
-- name: Template SMTP healcheck script
-  template:
-    src:   'scripts/smtp_healthcheck.sh.j2'
-    dest:  '{{ openkm_mail_cont_vol }}/healthcheck.sh'
-    owner: 'dockremap'
-    group: 'docker'
-    mode:  '0755'
