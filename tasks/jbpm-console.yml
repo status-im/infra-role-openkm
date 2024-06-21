@@ -1,0 +1,23 @@
+---
+- name: Download
+  block:
+    - name: jBPM Console | Download binary ZIP
+      register: jbpm_local_file
+      get_url:
+        url: 'https://download.openkm.com/okm/pro/workflow/jbpm-console-{{ openkm_jbpm_version }}.zip'
+        dest: '/tmp/jbpm-console-{{ openkm_jbpm_version }}.zip'
+        checksum: '{{ openkm_jbpm_checksum }}'
+        mode: 0644
+
+    - name: jBPM Console | Unpack binary
+      unarchive:
+        src: '{{ jbpm_local_file.dest }}'
+        dest: '{{ openkm_app_cont_vol }}/webapps'
+        include: ['jbpm-console.war']
+        remote_src: true
+        mode: 0755
+
+    - name: jBPM Console | Remove ZIP
+      file:
+        path: '{{ jbpm_local_file.dest }}'
+        state: absent

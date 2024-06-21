@@ -7,15 +7,16 @@
     mode:  '{{ item.get("mode",  "0750") }}'
     state: 'directory'
   with_items:
-    - { path: '{{ openkm_service_path }}',       group: 'docker'                     }
-    - { path: '{{ openkm_app_cont_vol }}',       group: 'docker'                     }
-    - { path: '{{ openkm_app_cont_vol }}/docker',group: 'docker'                     }
-    - { path: '{{ openkm_app_cont_vol }}/data',  owner: '{{ openkm_app_cont_uid }}'  }
-    - { path: '{{ openkm_app_cont_vol }}/conf',  owner: '{{ openkm_app_cont_uid }}'  }
-    - { path: '{{ openkm_app_cont_vol }}/logs',  owner: '{{ openkm_app_cont_uid }}'  }
-    - { path: '{{ openkm_app_cont_vol }}/repo',  owner: '{{ openkm_app_cont_uid }}'  }
-    - { path: '{{ openkm_xvfb_cont_vol }}',      group: '{{ openkm_xvfb_cont_uid }}', mode: '1777' }
-    - { path: '{{ openkm_mail_cont_vol }}',      group: 'docker'                     }
+    - { path: '{{ openkm_service_path }}',         group: 'docker'                     }
+    - { path: '{{ openkm_app_cont_vol }}',         group: 'docker'                     }
+    - { path: '{{ openkm_app_cont_vol }}/docker',  group: 'docker'                     }
+    - { path: '{{ openkm_app_cont_vol }}/data',    owner: '{{ openkm_app_cont_uid }}'  }
+    - { path: '{{ openkm_app_cont_vol }}/conf',    owner: '{{ openkm_app_cont_uid }}'  }
+    - { path: '{{ openkm_app_cont_vol }}/logs',    owner: '{{ openkm_app_cont_uid }}'  }
+    - { path: '{{ openkm_app_cont_vol }}/repo',    owner: '{{ openkm_app_cont_uid }}'  }
+    - { path: '{{ openkm_app_cont_vol }}/webapps', owner: '{{ openkm_app_cont_uid }}'  }
+    - { path: '{{ openkm_xvfb_cont_vol }}',        group: '{{ openkm_xvfb_cont_uid }}', mode: '1777' }
+    - { path: '{{ openkm_mail_cont_vol }}',        group: 'docker'                     }
 
 - name: Template container env files
   no_log: true

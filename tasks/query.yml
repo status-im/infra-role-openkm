@@ -2,6 +2,8 @@
 - name: Query API for current version used
   no_log: true
   uri:
+    # TODO: investigate 30s timing out
+    timeout: 120
     url: 'http://localhost:{{ openkm_app_cont_port }}/openkm/rest/repository/configuration/version'
     user:     '{{ openkm_admin_username | mandatory }}'
     password: '{{ openkm_admin_password | mandatory }}'

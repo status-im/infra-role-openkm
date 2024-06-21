@@ -1,0 +1,60 @@
+---
+- name: Install psycopg2 dependency
+  apt:
+    name: 'python3-psycopg2'
+
+- name: Update okmAdmin user password
+  no_log: true
+  postgresql_query:
+    db:             '{{ openkm_db_name | mandatory }}'
+    login_user:     '{{ openkm_db_user | mandatory }}'
+    login_password: '{{ openkm_db_pass | mandatory }}'
+    login_host:     'localhost'
+    query: |
+      UPDATE okm_user
+      SET usr_password = %s
+      WHERE usr_id = %s
+    positional_args:
+      - '{{ openkm_admin_password | password_hash("bcrypt") }}'
+      - '{{ openkm_admin_username | mandatory }}'
+
+- name: Set workflow.adapter config
+  postgresql_query:
+    db:             '{{ openkm_db_name | mandatory }}'
+    login_user:     '{{ openkm_db_user | mandatory }}'
+    login_password: '{{ openkm_db_pass | mandatory }}'
+    login_host:     'localhost'
+    query: |
+      UPDATE okm_config
+      SET cfg_value = 'com.openkm.workflow.adapter.JbpmRemoteWorkflowAdapter'
+      WHERE cfg_key = 'workflow.adapter'
+
+- name: Set workflow.adapter.password config
+  no_log: true
+  postgresql_query:
+    db:             '{{ openkm_db_name | mandatory }}'
+    login_user:     '{{ openkm_db_user | mandatory }}'
+    login_password: '{{ openkm_db_pass | mandatory }}'
+    login_host:     'localhost'
+    query: |
+      UPDATE okm_config
+      SET cfg_value = %s
+      WHERE cfg_key = 'workflow.adapter.pasword'
+    positional_args:
+      - '{{ openkm_jbpm_admin_password | mandatory }}'
+
+# TODO: jbpm doesn't accept passwords, maybe due to bcrypt version diff 2a vs 2b
+#- name: Update jbpm admin user password
+#  #no_log: true
+#  postgresql_query:
+#    db:             '{{ openkm_jbpm_db_name | mandatory }}'
+#    login_user:     '{{ openkm_jbpm_db_user | mandatory }}'
+#    login_password: '{{ openkm_jbpm_db_pass | mandatory }}'
+#    login_host:     'localhost'
+#    query: |
+#      UPDATE jbpm_user
+#      SET usr_password = %s
+#      WHERE usr_id = %s
+#    positional_args:
+#      - '{{ openkm_jbpm_admin_password | password_hash(hashtype="bcrypt", rounds=10) }}'
+#      - '{{ openkm_jbpm_admin_username | mandatory }}'
