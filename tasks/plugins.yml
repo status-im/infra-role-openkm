@@ -1,0 +1,9 @@
+---
+- name: Download
+  get_url:
+    url: '{{ openkm_status_plugins_url }}'
+    dest: '{{ openkm_app_cont_vol }}/plugins'
+    checksum: 'sha256:{{ openkm_status_plugins_checksum }}'
+    mode: 0644
+    owner: '{{ openkm_app_cont_uid }}'
+    group: 'dockremap'

@@ -3,6 +3,7 @@
 - import_tasks: query.yml
 - import_tasks: config.yml
 - import_tasks: jbpm-console.yml
+- import_tasks: plugins.yml
 - import_tasks: docker.yml
 - import_tasks: config-db.yml
 - import_tasks: consul.yml

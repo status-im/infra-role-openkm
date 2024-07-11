@@ -38,6 +38,10 @@ openkm_jbpm_admin_username: 'admin'
 openkm_jbpm_version:        '2.1'
 openkm_jbpm_checksum:       'sha256:100a52e4ac4892c35fbaaab10245c02396e155f2078dd1471c89fc590455b19b'
 
+# Status Plugins
+openkm_status_plugins_url:      'https://status-misc.ams3.digitaloceanspaces.com/openkm/statusPlugins.jar'
+openkm_status_plugins_checksum: 'e2e79e6320683af4b47172e03dfa056423c413c35e3bafb03e19aa99774290ef'
+
 # Xvfb
 openkm_xvfb_cont_name: '{{ openkm_service_name }}-xvfb'
 openkm_xvfb_cont_vol: '{{ openkm_service_path }}/xvfb'
