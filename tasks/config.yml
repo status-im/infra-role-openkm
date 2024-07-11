@@ -16,6 +16,12 @@
     - { path: '{{ openkm_app_cont_vol }}/plugins', owner: '{{ openkm_app_cont_uid }}'  }
     - { path: '{{ openkm_xvfb_cont_vol }}',        group: '{{ openkm_xvfb_cont_uid }}', mode: '1777' }
 
+- name: Create a symbolic link to /docker
+  file:
+    src: /data
+    dest: /docker
+    state: link
+
 - name: Create installation ID file
   no_log: true
   when: openkm_installation_id is defined

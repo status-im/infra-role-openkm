@@ -1,6 +1,6 @@
 ---
 openkm_service_name: 'openkm'
-openkm_service_path: '/docker/{{ openkm_service_name }}'
+openkm_service_path: '/data/{{ openkm_service_name }}'
 openkm_compose_file: '{{ openkm_service_path }}/docker-compose.yml'
 
 # Config
