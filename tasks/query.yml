@@ -1,6 +1,8 @@
 ---
+# TODO: fix for new installation
 - name: Query API for current version used
   no_log: true
+  ignore_errors: true
   uri:
     # TODO: investigate 30s timing out
     timeout: 120

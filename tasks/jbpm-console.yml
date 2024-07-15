@@ -15,6 +15,8 @@
         dest: '{{ openkm_app_cont_vol }}/webapps'
         include: ['jbpm-console.war']
         remote_src: true
+        owner: '{{ openkm_app_cont_uid }}'
+        group: 'docker'
         mode: 0755
 
     - name: jBPM Console | Remove ZIP

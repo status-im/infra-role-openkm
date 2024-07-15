@@ -3,6 +3,7 @@
   apt:
     name: 'python3-psycopg2'
 
+# TODO: fix for new installaion, tables are not ready immediatly
 - name: Update okmAdmin user password
   no_log: true
   postgresql_query:
@@ -39,7 +40,7 @@
     query: |
       UPDATE okm_config
       SET cfg_value = %s
-      WHERE cfg_key = 'workflow.adapter.pasword'
+      WHERE cfg_key = 'workflow.adapter.password'
     positional_args:
       - '{{ openkm_jbpm_admin_password | mandatory }}'
 
