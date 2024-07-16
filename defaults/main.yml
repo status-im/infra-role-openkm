@@ -9,8 +9,8 @@ openkm_admin_username: 'okmAdmin'
 #openkm_admin_password: 'changeIfYouCare'
 # WARN: Read carefully the Changelog it might have manual upgrade steps.
 openkm_version: '8.1.7'
-openkm_root_log_level: 'error'
-openkm_log_login_attempts: false
+# Keep OFF, otherwise it will show wrong password attempts in the log in plain text
+openkm_root_log_level: 'off'
 openkm_allowed_networks: [' 10.0.0.0/8', '172.16.0.0/16']
 openkm_max_file_size_mb: 100 # MB
 

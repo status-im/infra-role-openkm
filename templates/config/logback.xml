@@ -4,7 +4,8 @@
   <logger name="org.hibernate.SQL" level="INFO" />
   <logger name="org.hibernate.type.descriptor.sql" level="INFO" />
   <logger name="ch.qos.logback" level="WARN" />
-  <logger name="com.openkm" level="INFO" />
+  <!-- Keep OFF, otherwise it will show wrong password attempts in the log in plain text -->
+  <logger name="com.openkm" level="OFF" />
   <logger name="com.openkm.util.DocConverter" level="INFO" />
   <logger name="com.openkm.util.ExecutionUtils" level="INFO" />
   
@@ -15,10 +16,6 @@
   <logger name="com.openkm.module.db.base.BaseNotificationModule" level="INFO" />
   <logger name="com.openkm.principal.PrincipalUtils" level="INFO" />
   
-{% if not openkm_log_login_attempts %}
-  <!-- Disable printing passwords in logs. -->
-  <logger name="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter" level="OFF" />
-{% endif %}
   <logger name="org.springframework.jdbc" level="INFO" />
   <logger name="org.springframework.orm.jpa" level="INFO" />
   <logger name="org.springframework.transaction" level="INFO" />
