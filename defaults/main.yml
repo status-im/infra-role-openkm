@@ -58,6 +58,11 @@ openkm_db_post: 5432
 openkm_db_name: 'openkm'
 openkm_db_user: 'openkm'
 openkm_db_pass: 'changeIfYouCare'
+# Additional config for Share Links workflow
+openkm_db_okm_config_extra:
+- { key: 'wf.internalsharing.max.days', value: '20' }
+- { key: 'wf.subject.link.notify', value: 'Files have been shared with you - OpenKM' }
+- { key: 'wf.body.link.notify', value: 'The following file been shared with you by <sharer>:<br/><br/><URL><br/><br/>This file can be accessed till <date> after which the link will expire. If the link does not work, please get in touch with <sharer> and they can reshare it with you.<br/><br/>Any other issues, please get in touch with the Infra team for support.<br/><br/>Thanks!'}
 
 # Mail
 #openkm_mail_from:      ~
