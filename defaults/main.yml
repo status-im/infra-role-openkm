@@ -29,6 +29,7 @@ openkm_app_cont_tag: '{{ openkm_version }}-nonroot'
 openkm_app_cont_image: 'docker.openkm.com/private/professional:{{ openkm_app_cont_tag }}'
 openkm_app_cont_port: 8080
 openkm_app_cont_uid: 1000
+openkm_app_cont_user: 'openkm'
 
 # jBPM Console
 openkm_jbpm_db_name:        'jbpm_console'

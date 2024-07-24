@@ -1,4 +1,6 @@
 ---
+# We need host openkm user/group, as remap is off
+- import_tasks: user.yml
 - import_tasks: auth.yml
 - import_tasks: query.yml
 - import_tasks: config.yml

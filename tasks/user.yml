@@ -1,0 +1,13 @@
+---
+- name: Create OpenKM group
+  group:
+    name: '{{ openkm_app_cont_user }}'
+    gid:  '{{ openkm_app_cont_uid }}'
+
+- name: Create OpenKM user
+  user:
+    name:        '{{ openkm_app_cont_user }}'
+    uid:         '{{ openkm_app_cont_uid }}'
+    group:       '{{ openkm_app_cont_user }}'
+    create_home: false
+    shell:       '/usr/bin/false'

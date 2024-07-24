@@ -1,20 +1,20 @@
 ---
-- name: Create directory for DB data
+- name: Create OpenKM app directories
   file:
     path:  '{{ item.path }}'
-    owner: '{{ item.get("owner", "dockremap") }}'
-    group: '{{ item.get("group", "dockremap") }}'
+    owner: '{{ item.get("owner", openkm_app_cont_user) }}'
+    group: '{{ item.get("group", "docker") }}'
     mode:  '{{ item.get("mode",  "0750") }}'
     state: 'directory'
   with_items:
-    - { path: '{{ openkm_service_path }}',         group: 'docker'                     }
-    - { path: '{{ openkm_app_cont_vol }}',         group: 'docker'                     }
-    - { path: '{{ openkm_app_cont_vol }}/conf',    owner: '{{ openkm_app_cont_uid }}'  }
-    - { path: '{{ openkm_app_cont_vol }}/logs',    owner: '{{ openkm_app_cont_uid }}'  }
-    - { path: '{{ openkm_app_cont_vol }}/repo',    owner: '{{ openkm_app_cont_uid }}'  }
-    - { path: '{{ openkm_app_cont_vol }}/webapps', owner: '{{ openkm_app_cont_uid }}'  }
-    - { path: '{{ openkm_app_cont_vol }}/plugins', owner: '{{ openkm_app_cont_uid }}'  }
-    - { path: '{{ openkm_xvfb_cont_vol }}',        group: '{{ openkm_xvfb_cont_uid }}', mode: '1777' }
+    - { path: '{{ openkm_service_path }}' }
+    - { path: '{{ openkm_app_cont_vol }}' }
+    - { path: '{{ openkm_app_cont_vol }}/conf' }
+    - { path: '{{ openkm_app_cont_vol }}/logs' }
+    - { path: '{{ openkm_app_cont_vol }}/repo' }
+    - { path: '{{ openkm_app_cont_vol }}/webapps' }
+    - { path: '{{ openkm_app_cont_vol }}/plugins' }
+    - { path: '{{ openkm_xvfb_cont_vol }}', group: '{{ openkm_xvfb_cont_uid }}', mode: '1777' }
 
 - name: Create a symbolic link to /docker
   file:
@@ -29,8 +29,8 @@
   copy:
     content: '{{ openkm_installation_id }}'
     dest:  '{{ openkm_app_cont_vol }}/repo/.system.key'
-    owner: '{{ openkm_app_cont_uid }}'
-    group: '{{ openkm_app_cont_uid }}'
+    owner: '{{ openkm_app_cont_user }}'
+    group: 'docker'
     mode:  '0640'
 
 - name: Template OpenKM config files
@@ -39,8 +39,8 @@
   template:
     src:   '{{ item }}'
     dest:  '{{ openkm_app_cont_vol }}/conf/{{ item | basename }}'
-    owner: '{{ openkm_app_cont_uid }}'
+    owner: '{{ openkm_app_cont_user }}'
     group: 'docker'
-    mode:  '0644'
+    mode:  '0640'
   with_fileglob:
     - 'templates/config/*'
