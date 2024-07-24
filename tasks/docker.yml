@@ -23,7 +23,7 @@
     files: '{{ openkm_compose.files | map(attribute="path") | list }}'
     pull: 'always'
     build: 'always'
-    # TODO: investigate and issue with containers not getting started initially.
+    # FIXME: "restarted" doesn't create containers on the first run
     state: >-
       {{ (openkm_config.changed or compose_restart)
       | ternary("restarted", compose_state) }}

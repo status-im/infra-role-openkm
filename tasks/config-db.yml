@@ -6,6 +6,7 @@
 # TODO: fix for new installaion, tables are not ready immediatly
 - name: Update okmAdmin user password
   no_log: true
+  ignore_errors: true
   postgresql_query:
     db:             '{{ openkm_db_name | mandatory }}'
     login_user:     '{{ openkm_db_user | mandatory }}'
@@ -20,6 +21,7 @@
       - '{{ openkm_admin_username | mandatory }}'
 
 - name: Set workflow.adapter config
+  ignore_errors: true
   postgresql_query:
     db:             '{{ openkm_db_name | mandatory }}'
     login_user:     '{{ openkm_db_user | mandatory }}'
@@ -32,6 +34,7 @@
 
 - name: Set workflow.adapter.password config
   no_log: true
+  ignore_errors: true
   postgresql_query:
     db:             '{{ openkm_db_name | mandatory }}'
     login_user:     '{{ openkm_db_user | mandatory }}'

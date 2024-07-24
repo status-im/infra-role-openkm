@@ -30,10 +30,23 @@ openkm_mail_smtp_pass:       'password_too'
 # Installation
 
 Few things are manual:
-1. DB configuration will fail, because tables don't exist yet.
-   So you need to disable the task first and run after migrations are done.
-2. Installation ID is generated automatically on the first run,
-   it should be kept and shared with OpenKM support for licensing.
+1. Set migrations to create tables. This is only needed during the first run.
+[jbpm-console.properties](./templates/config/jbpm-console.properties):
+```
+hibernate.hbm2ddl=create
+```
+[openkm.properties](./templates/config/openkm.properties):
+```
+spring.jpa.hibernate.ddl-auto=create-only
+```
+Running `create` again will break OpenKM. Be careful.
+OpenKM will change it to `none` after running.
+2. DB configuration will fail, because tables don't exist yet.
+So you need to rerun the role after some time.
+3. Installation ID is generated automatically on the first run,
+it should be kept and shared with OpenKM support for licensing.
+If you already have a key, it will be overwritten by OpenKM, so role needs to run again.
+4. Change jBPM console admin password manually.
 
 # Upgrade
 
