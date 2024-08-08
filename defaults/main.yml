@@ -44,7 +44,7 @@ openkm_jbpm_checksum:       'sha256:100a52e4ac4892c35fbaaab10245c02396e155f2078d
 
 # Status Plugins
 openkm_status_plugins_url:      'https://status-misc.ams3.digitaloceanspaces.com/openkm/statusPlugins.jar'
-openkm_status_plugins_checksum: 'db325e2bf0094aa1350c76fff669ba6000c95c9811b6165f263d2567f6e010fd'
+openkm_status_plugins_checksum: '662348ccea0915d6ab3d411e5fd34433671b00da17d99503e2b3f4ca281cbfd6'
 
 # Xvfb
 openkm_xvfb_cont_name: '{{ openkm_service_name }}-xvfb'
