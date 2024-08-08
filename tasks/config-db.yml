@@ -82,7 +82,8 @@
         granted_by VARCHAR(255) NOT NULL,
         granted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         expires_at TIMESTAMP NULL,
-        node_id    INT NOT NULL
+        node_id    INT NOT NULL,
+        status     VARCHAR(255) NOT NULL
         )
       - CREATE INDEX IF NOT EXISTS idx_recipient ON permissions (recipient)
       - CREATE INDEX IF NOT EXISTS idx_granted_by ON permissions (granted_by)
