@@ -62,7 +62,7 @@
     positional_args:
       - '{{ item.key }}'
       - '{{ item.value }}'
-  loop: openkm_db_okm_config_extra
+  loop: '{{ openkm_db_okm_config_extra }}'
 
 - name: Add extra tables
   postgresql_query:
