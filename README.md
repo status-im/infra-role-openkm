@@ -1,6 +1,7 @@
 # Description
 
 This role sets up 4 components:
+
 - OpenKM
 - xvfb
 - jBMP Console
@@ -11,6 +12,7 @@ And it requires PostgreSQL
 # Configuration
 
 These settings are all mandatory:
+
 ```yaml
 openkm_domain:               'openkm.example.org'
 openkm_admin_password:       'changeIfYouCare'
@@ -30,15 +32,20 @@ openkm_mail_smtp_pass:       'password_too'
 # Installation
 
 Few things are manual:
+
 1. Set migrations to create tables. This is only needed during the first run.
 [jbpm-console.properties](./templates/config/jbpm-console.properties):
-```
+
+```properties
 hibernate.hbm2ddl=create
 ```
+
 [openkm.properties](./templates/config/openkm.properties):
-```
+
+```properties
 spring.jpa.hibernate.ddl-auto=create-only
 ```
+
 Running `create` again will break OpenKM. Be careful.
 OpenKM will change it to `none` after running.
 2. DB configuration will fail, because tables don't exist yet.
@@ -51,7 +58,8 @@ If you already have a key, it will be overwritten by OpenKM, so role needs to ru
 # Upgrade
 
 This role has 3 components, which could be upgraded - openkm, jbmp-console and status plugins:
-```
+
+```yaml
 openkm_version:                 '8.1.7'
 openkm_jbpm_version:            '2.1'
 openkm_jbpm_checksum:           'sha256:100a52e4ac4892c35fbaaab10245c02396e155f2078dd1471c89fc590455b19b'
@@ -65,14 +73,20 @@ During the jBPM Console upgrade - set `hibernate.hbm2ddl=update`.
 # Management
 
 The container is managed using Docker Compose.
-```
+
+```text
 ❯ dc ps
 NAME          IMAGE                                                   COMMAND                  SERVICE   CREATED      STATUS                 PORTS
 openkm-app    docker.openkm.com/private/professional:8.1.11-nonroot   "/opt/tomcat/bin/cat…"   app       4 days ago   Up 5 hours (healthy)
 openkm-xvfb   docker.openkm.com/private/professional:8.1.11-nonroot   "/usr/bin/Xvfb :1"       xvfb      4 days ago   Up 5 hours (healthy)   8080/tcp
 ```
 
-# Useful links:
+# Backup & Restore
+
+See [BACKUP.md](./BACKUP.md) doc.
+
+# Useful links
+
 - [OpenKM Support](https://support.openkm.com)
 - [OpenKM Documentation](https://docs.openkm.com/kcenter/view/okm-8.1/)
 - [OpenKM Changelog](https://docs.openkm.com/kcenter/view/okm-8.1/changelog.html)
