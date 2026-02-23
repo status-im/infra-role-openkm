@@ -35,10 +35,10 @@ sudo chmod g+w -R /docker/openkm/{backup,app/repo}
 sudo -i -u restic restic restore --target=/ 12345678 # okmrepo
 sudo -i -u restic restic restore --target=/ 87654321 # pgdumpdir
 
-sudo chown -R openkm:openkm repo
-sudo chown openkm:docker repo repo/.system.key
-sudo chown -R dockremap:dockremap backup
-sudo chown dockremap:docker backup
+sudo chown -R openkm:openkm /docker/openkm/app/repo
+sudo chown openkm:docker /docker/openkm/app/repo /docker/openkm/app/repo/.system.key
+sudo chown -R dockremap:dockremap /docker/openkm/backup
+sudo chown dockremap:docker /docker/openkm/backup
 
 sudo chmod g-w -R /docker/openkm/{backup,app/repo}
 ```
@@ -56,7 +56,7 @@ By using `--target=/` we restore the backup to the same location from which it w
 Purge the DB to make sure restore really works:
 
 ```bash
-rm -fr /docker/openkm/data/pgdata/*
+sudo rm -fr /docker/openkm/data/pgdata
 docker compose -f docker-compose.db.yml up -d
 ```
 
