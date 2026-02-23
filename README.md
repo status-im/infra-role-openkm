@@ -17,8 +17,6 @@ These settings are all mandatory:
 openkm_domain:               'openkm.example.org'
 openkm_admin_password:       'changeIfYouCare'
 openkm_installation_id:      '00000000-0000-0000-0000-000000000000'
-openkm_docker_registry_user: 'some_user'
-openkm_docker_registry_pass: 'some_password'
 openkm_jbpm_db_pass:         'another_password'
 openkm_jbpm_admin_password:  'one_more_password'
 openkm_db_pass:              'yet_another_password'

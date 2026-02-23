@@ -2,7 +2,7 @@
 services:
   app:
     container_name: '{{ openkm_app_cont_name }}'
-    image: '{{ openkm_app_cont_image }}'
+    image: '{{ openkm_app_cont_image | mandatory }}'
     user: 'openkm'
     network_mode: 'host'
     restart: 'always'
